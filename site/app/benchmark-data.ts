@@ -8,3 +8,34 @@ export const benchmarkData: { varyL: { runtime: ChartDatum[]; communication: Cha
     {x:2,equality:{median:.00786482,p25:.00755834,p75:.0086401},max:{median:.00761349,p25:.0071044,p75:.00850175}}, {x:4,equality:{median:.0163589,p25:.0149536,p75:.016407},max:{median:.0299213,p25:.029534,p75:.0304808}}, {x:8,equality:{median:.0507847,p25:.0505439,p75:.0531272},max:{median:.19194,p25:.191747,p75:.199035}}, {x:10,equality:{median:.0792291,p25:.0745476,p75:.0849717},max:{median:.355867,p25:.328238,p75:.359579}}, {x:20,equality:{median:.3063,p25:.289424,p75:.312707},max:{median:2.14809,p25:2.1174,p75:2.34456}}, {x:30,equality:{median:.635197,p25:.625325,p75:.639117},max:{median:6.6053,p25:6.59432,p75:6.73401}}, {x:40,equality:{median:1.06886,p25:1.05976,p75:1.09744},max:{median:16.922,p25:16.7436,p75:17.8943}}, {x:50,equality:{median:1.69878,p25:1.66232,p75:1.70306},max:{median:36.1021,p25:35.792,p75:37.2479}}],
     communication: [{x:2,equality:{median:.089238,p25:.089238,p75:.089238},max:{median:.211334,p25:.211334,p75:.211334}}, {x:4,equality:{median:.532524,p25:.532524,p75:.532524},max:{median:3.65622,p25:3.65622,p75:3.65622}}, {x:8,equality:{median:2.47834,p25:2.47834,p75:2.47834},max:{median:40.0037,p25:40.0037,p75:40.0037}}, {x:10,equality:{median:3.98086,p25:3.98086,p75:3.98086},max:{median:81.9574,p25:81.9574,p75:81.9574}}, {x:20,equality:{median:16.7897,p25:16.7897,p75:16.7897},max:{median:729.21,p25:729.21,p75:729.21}}, {x:30,equality:{median:38.4255,p25:38.4255,p75:38.4255},max:{median:2552.37,p25:2552.37,p75:2552.37}}, {x:40,equality:{median:68.8884,p25:68.8884,p75:68.8884},max:{median:6609.08,p25:6609.08,p75:6609.08}}, {x:50,equality:{median:108.178,p25:108.178,p75:108.178},max:{median:12773.6,p25:12773.6,p75:12773.6}}]}
 };
+
+export type ExtensionDatum = { x: number; [key: string]: number };
+export const extensionData = {
+  median: [
+    { x: 100, plaintext: 0.00000542467, secure: 0.407407 },
+    { x: 1000, plaintext: 0.0000400076, secure: 2.38133 },
+    { x: 10000, plaintext: 0.000394518, secure: 31.813 },
+  ],
+  escg: [
+    { x: 2, measured: 0.00844076 }, { x: 4, measured: 0.0341039 },
+    { x: 8, measured: 0.338786 }, { x: 10, measured: 0.661813 },
+    { x: 20, measured: 2.51659 }, { x: 30, measured: 7.29275 },
+    { x: 40, measured: 21.3933 }, { x: 50, measured: 48.1217 },
+  ],
+  network: [
+    { x: 2, LAN: 0.155150, WAN: 7.27553 }, { x: 4, LAN: 0.894588, WAN: 41.8789 },
+    { x: 8, LAN: 3.64954, WAN: 153.006 }, { x: 10, LAN: 6.35374, WAN: 258.821 },
+    { x: 20, LAN: 22.0367, WAN: 743.397 }, { x: 30, LAN: 49.7155, WAN: 1306.16 },
+    { x: 40, LAN: 109.873, WAN: 2330.47 }, { x: 50, LAN: 198.584, WAN: 3465.78 },
+  ],
+  mnistAccuracy: [
+    { x: 1, plaintext: 36.85, secure: 36.85 },
+    { x: 2, plaintext: 43.65, secure: 43.65 },
+    { x: 3, plaintext: 48.60, secure: 48.60 },
+  ],
+  mnistAggregation: [
+    { x: 1, plaintext: 0.000081151, secure: 7.66424 },
+    { x: 2, plaintext: 0.000029283, secure: 3.41970 },
+    { x: 3, plaintext: 0.000026810, secure: 2.96944 },
+  ],
+};

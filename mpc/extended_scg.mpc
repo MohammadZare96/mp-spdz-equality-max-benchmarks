@@ -1,0 +1,60 @@
+"""Extended SCG from Section 4.1.1: return maximum value and its index.
+
+Compile-time arguments:
+    L K N PRIME
+
+Every input owner supplies its partition and 0-coded vectors. The input index
+is carried as a secret intermediate and selected together with the encoded
+maximum, exactly as described for ESCG in the paper.
+"""
+
+import operator
+
+from Compiler import util
+
+
+L = int(program.args[1])
+K = int(program.args[2])
+N = int(program.args[3])
+PRIME = int(program.args[4])
+
+if K < 2 or N < 2:
+    raise ValueError("Extended SCG requires at least two inputs and parties")
+if PRIME.bit_length() != L:
+    raise ValueError("L must equal ceil(log2(PRIME))")
+
+
+def extended_scg(left, right):
+    left_partition, left_zero, left_index = left
+    right_partition, right_zero, right_index = right
+    product = util.tree_reduce(
+        operator.mul,
+        [left_partition[position] - right_zero[position] for position in range(L)],
+    )
+    # g=0 iff left > right; ties deterministically select the right input.
+    g = product ** (PRIME - 1)
+    out_partition = left_partition + g * (right_partition - left_partition)
+    out_zero = left_zero + g * (right_zero - left_zero)
+    out_index = left_index + g * (right_index - left_index)
+    return out_partition, out_zero, out_index
+
+
+states = []
+for input_index in range(K):
+    owner = input_index % N
+    partition = sint.get_input_from(owner, size=L)
+    zero_coded = sint.get_input_from(owner, size=L)
+    states.append((partition, zero_coded, sint(input_index)))
+
+while len(states) > 1:
+    next_level = []
+    for index in range(0, len(states) - 1, 2):
+        next_level.append(extended_scg(states[index], states[index + 1]))
+    if len(states) % 2:
+        next_level.append(states[-1])
+    states = next_level
+
+maximum = states[0][0][L - 1]
+maximum_index = states[0][2]
+print_ln("ESCG_MAX %s", maximum.reveal())
+print_ln("ESCG_INDEX %s", maximum_index.reveal())

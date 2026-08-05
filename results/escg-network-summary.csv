@@ -1,0 +1,17 @@
+N,network_profile,latency_ms,bandwidth_mbps,estimated_runtime_median_seconds,estimated_runtime_p25_seconds,estimated_runtime_p75_seconds,estimate_method
+2,LAN,1.0,1000.0,0.15515005599999998,0.155069291,0.15550827099999998,round-and-byte trace model
+2,WAN,50.0,100.0,7.27553372,7.275452955,7.275891935000001,round-and-byte trace model
+4,LAN,1.0,1000.0,0.8945884599999999,0.89329436,0.92488346,round-and-byte trace model
+4,WAN,50.0,100.0,41.8789495,41.877655399999995,41.9092445,round-and-byte trace model
+8,LAN,1.0,1000.0,3.6495428,3.6445148,3.6758933000000003,round-and-byte trace model
+8,WAN,50.0,100.0,153.006354,153.001326,153.0327045,round-and-byte trace model
+10,LAN,1.0,1000.0,6.353736199999999,6.313967699999999,6.357025199999999,round-and-byte trace model
+10,WAN,50.0,100.0,258.821045,258.7812765,258.824334,round-and-byte trace model
+20,LAN,1.0,1000.0,22.036678000000002,22.035508,22.100568,round-and-byte trace model
+20,WAN,50.0,100.0,743.39747,743.3963,743.46136,round-and-byte trace model
+30,LAN,1.0,1000.0,49.715469999999996,49.656819999999996,50.839385,round-and-byte trace model
+30,WAN,50.0,100.0,1306.15995,1306.1012999999998,1307.2838649999999,round-and-byte trace model
+40,LAN,1.0,1000.0,109.8731,109.28235,124.5159,round-and-byte trace model
+40,WAN,50.0,100.0,2330.4713,2329.88055,2345.1141,round-and-byte trace model
+50,LAN,1.0,1000.0,198.5837,194.18655,204.2855,round-and-byte trace model
+50,WAN,50.0,100.0,3465.7817000000005,3461.3355500000002,3471.4835000000003,round-and-byte trace model

@@ -1,0 +1,78 @@
+"""Coordinate-wise median of K encoded vectors using the paper's SCI method.
+
+Compile-time arguments:
+    L K N D PRIME OUTPUT_ALL
+
+The input layout is column-major for SIMD execution. For every client, the
+owner supplies D entries for each of the L partition-vector positions, followed
+by D entries for each of the L 0-coded-vector positions. Values must be unique
+across clients at every coordinate, matching the rank test in Section 4.2.
+"""
+
+import operator
+
+from Compiler import util
+
+
+L = int(program.args[1])
+K = int(program.args[2])
+N = int(program.args[3])
+D = int(program.args[4])
+PRIME = int(program.args[5])
+OUTPUT_ALL = int(program.args[6])
+
+if K < 2 or K % 2:
+    raise ValueError("the paper median benchmark requires an even K >= 2")
+if N < 2:
+    raise ValueError("median requires at least two MPC parties")
+if D < 1:
+    raise ValueError("vector dimension must be positive")
+if PRIME.bit_length() != L:
+    raise ValueError("L must equal ceil(log2(PRIME))")
+
+
+def comparison_indicator(left_partition, right_zero):
+    """Return 0 where left > right and 1 otherwise, coordinate-wise."""
+    product = util.tree_reduce(
+        operator.mul,
+        [left_partition[position] - right_zero[position] for position in range(L)],
+    )
+    return product ** (PRIME - 1)
+
+
+states = []
+for client in range(K):
+    owner = client % N
+    partition = [sint.get_input_from(owner, size=D) for _ in range(L)]
+    zero_coded = [sint.get_input_from(owner, size=D) for _ in range(L)]
+    states.append((partition, zero_coded))
+
+# Section 4.2: candidate i is the upper median iff the number of inputs that
+# are greater than or equal to it is K/2. For distinct values, the reverse SCI
+# bit is one minus the forward bit, so every unordered pair is evaluated only
+# once. The initial one accounts for comparing a candidate with itself.
+ranks = [1 for _ in range(K)]
+for left in range(K):
+    for right in range(left + 1, K):
+        indicator = comparison_indicator(states[left][0], states[right][1])
+        ranks[left] += indicator
+        ranks[right] += 1 - indicator
+
+selectors = []
+for candidate in range(K):
+    not_median = (ranks[candidate] - K // 2) ** (PRIME - 1)
+    selectors.append(1 - not_median)
+
+median = sum(
+    selectors[candidate] * states[candidate][0][L - 1]
+    for candidate in range(K)
+)
+checksum = util.tree_reduce(operator.add, [median[index] for index in range(D)])
+
+print_ln("MEDIAN_CHECKSUM %s", checksum.reveal())
+print_ln("MEDIAN_FIRST %s", median[0].reveal())
+print_ln("MEDIAN_LAST %s", median[D - 1].reveal())
+
+if OUTPUT_ALL:
+    for index in range(D):
+        print_ln("MEDIAN_VALUE %s", median[index].reveal())
