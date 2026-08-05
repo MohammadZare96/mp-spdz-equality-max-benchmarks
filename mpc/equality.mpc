@@ -1,0 +1,28 @@
+"""Paper-compatible equality/zero test over a prime field.
+
+Compile-time arguments:
+    L K N PRIME
+
+K is accepted so that equality and max schedules use the same experiment
+coordinates. Equality itself consumes one value from party 0 and one from
+party 1. The paper's convention is preserved: 0 means equal, 1 means unequal.
+"""
+
+L = int(program.args[1])
+K = int(program.args[2])
+N = int(program.args[3])
+PRIME = int(program.args[4])
+
+if N < 2:
+    raise ValueError("equality requires at least two parties")
+if PRIME.bit_length() != L:
+    raise ValueError("L must equal ceil(log2(PRIME))")
+
+left = sint.get_input_from(0)
+right = sint.get_input_from(1)
+
+# Fermat zero indicator from Section 3.2 of the paper:
+#   delta^(q-1) = 0 when delta = 0, and 1 otherwise.
+not_equal = (left - right) ** (PRIME - 1)
+
+print_ln("EQUALITY_RESULT %s", not_equal.reveal())
