@@ -4,6 +4,17 @@ Reproducible MP-SPDZ implementation of the equality test in Section 3.2 and
 the multi-input maximum construction in Sections 3.3-3.5 of *Beyond Yao's
 Millionaires: Secure Multi-Party Computation of Non-Polynomial Functions*.
 
+
+## Live benchmark dashboard
+
+The verified interactive dashboard is deployed at:
+
+https://mp-spdz-benchmarks.mohre1918.chatgpt.site
+
+The repository includes all 120 correctness-checked raw runs in
+`results/raw.csv`, the 24-point median/IQR table in `results/summary.csv`,
+and the dashboard source under `site/`.
+
 The repository generates runtime and communication measurements for exactly
 these experiment families:
 
@@ -55,6 +66,7 @@ instructions if the build reports a missing system package.
 python3 benchmarks/run_benchmarks.py \
   --mp-spdz /opt/MP-SPDZ \
   --protocol semi \
+  --batch-size 500 \
   --repetitions 5 \
   --output results/raw.csv
 
@@ -98,6 +110,10 @@ Each repetition is correctness-checked before it is appended to the raw CSV.
 Runtime is the maximum `Time = ...` reported across parties. Communication is
 MP-SPDZ's `Global data sent`, summed across all parties; the maximum per-party
 communication and round count are retained as diagnostic columns.
+
+The preprocessing batch size defaults to 500. This bounds peak memory for the
+requested 40- and 50-party local runs, and the value is recorded in every raw
+row for reproducibility.
 
 `summarize.py` reports the median and interquartile range for runtime and global
 communication. `plot_results.py` creates the four requested comparisons as
