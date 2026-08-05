@@ -70,6 +70,7 @@ class Result:
     N: int
     repetition: int
     protocol: str
+    preprocessing_batch_size: int
     prime: int
     runtime_seconds: float
     global_communication_mb: float
@@ -248,6 +249,7 @@ def execute_case(
     protocol: str,
     repetition: int,
     expected: int,
+    batch_size: int,
     timeout: int,
 ) -> Result:
     run_id = uuid.uuid4().hex
@@ -261,7 +263,12 @@ def execute_case(
     if protocol == "shamir" and case.N < 3:
         raise ValueError("MP-SPDZ Shamir requires N >= 3; use --protocol semi for N=2")
 
-    run_checked([str(script), case.schedule], cwd=mp_spdz, env=env, timeout=timeout)
+    run_checked(
+        [str(script), case.schedule, "--batch-size", str(batch_size)],
+        cwd=mp_spdz,
+        env=env,
+        timeout=timeout,
+    )
     logs = sorted((mp_spdz / "logs").glob(f"{log_prefix}{case.schedule}-*"))
     try:
         runtime, global_comm, party_comm, rounds, observed = parse_party_logs(
@@ -271,10 +278,17 @@ def execute_case(
         for log in logs:
             log.unlink(missing_ok=True)
 
+    # MP-SPDZ prints prime-field values using centered representatives
+    # (for example, 246 in F_251 is displayed as -5). Normalize opened Max
+    # outputs to the canonical [0, p) representative before verification.
+    if case.operation == "max":
+        observed %= case.prime
+
     return Result(
         **asdict(case),
         repetition=repetition,
         protocol=protocol,
+        preprocessing_batch_size=batch_size,
         prime=case.prime,
         runtime_seconds=runtime,
         global_communication_mb=global_comm,
@@ -320,6 +334,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--operation", choices=("all", "equality", "max"), default="all")
     parser.add_argument("--sweep", choices=("all", "vary_L", "vary_KN"), default="all")
     parser.add_argument("--repetitions", type=int, default=5)
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=500,
+        help=(
+            "MP-SPDZ preprocessing batch size. The conservative default keeps "
+            "the requested 50-party cases within practical memory limits."
+        ),
+    )
     parser.add_argument("--seed", type=int, default=20260805)
     parser.add_argument("--timeout", type=int, default=1800)
     parser.add_argument("--no-compile", action="store_true")
@@ -331,6 +354,8 @@ def main() -> None:
     mp_spdz = args.mp_spdz.resolve()
     if args.repetitions < 1:
         raise SystemExit("--repetitions must be positive")
+    if args.batch_size < 1:
+        raise SystemExit("--batch-size must be positive")
 
     install_sources(mp_spdz)
     cases = select_cases(args)
@@ -348,7 +373,13 @@ def main() -> None:
             expected = prepare_inputs(mp_spdz, case, repetition, args.seed)
             started = time.monotonic()
             result = execute_case(
-                mp_spdz, case, args.protocol, repetition, expected, args.timeout
+                mp_spdz,
+                case,
+                args.protocol,
+                repetition,
+                expected,
+                args.batch_size,
+                args.timeout,
             )
             if not result.correct:
                 raise RuntimeError(
