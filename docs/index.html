@@ -7,154 +7,248 @@
       name="description"
       content="گالری نمودارهای بازتولیدشده‌ی Equality، Max، Median، Extended SCG و Federated MNIST در MP-SPDZ"
     />
-    <meta name="theme-color" content="#10192d" />
+    <meta name="theme-color" content="#101728" />
     <title>MP-SPDZ Benchmark Figures</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#figures">رفتن به نمودارها</a>
+
     <header class="hero">
-      <div class="hero__content">
-        <p class="eyebrow">MP-SPDZ · REPRODUCIBLE BENCHMARKS</p>
-        <h1>نمودارهای ارزیابی محاسبات چندطرفه‌ی امن</h1>
-        <p class="hero__summary">
-          نتایج اجرای Equality، Max، Median، Extended SCG و تجمیع امن در
-          Federated MNIST. همه‌ی نمودارهای این صفحه با محورهای خطی نمایش داده
-          شده‌اند.
-        </p>
-        <div class="hero__meta" aria-label="مشخصات مجموعه">
-          <span>۹ نمودار</span>
-          <span>اجرای واقعی MP-SPDZ</span>
-          <span>PNG + PDF</span>
+      <nav class="topbar" aria-label="ناوبری اصلی">
+        <a class="brand" href="#top" aria-label="ابتدای صفحه">
+          <span class="brand__mark" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </span>
+          <span>
+            <strong>MPC Benchmarks</strong>
+            <small>MP-SPDZ · Reproduction</small>
+          </span>
+        </a>
+        <a
+          class="repo-link"
+          href="https://github.com/MohammadZare96/mp-spdz-equality-max-benchmarks"
+          target="_blank"
+          rel="noreferrer"
+        >
+          مشاهدهٔ مخزن
+          <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+
+      <div class="hero__content" id="top">
+        <div class="hero__copy">
+          <p class="eyebrow"><span></span> مجموعهٔ نتایج بازتولیدشده</p>
+          <h1>ارزیابی عملیِ<br /><em>محاسبات چندطرفهٔ امن</em></h1>
+          <p class="hero__summary">
+            نتایج اجرای Equality، Max، Median، Extended SCG و تجمیع امن در
+            Federated MNIST؛ ارائه‌شده با محورهای خطی برای مقایسهٔ مستقیم و
+            خوانا.
+          </p>
+          <div class="hero__actions">
+            <a class="primary-action" href="#figures">مشاهدهٔ نمودارها <span aria-hidden="true">←</span></a>
+            <span class="hero__hint">PNG و PDF با کیفیت ارائه</span>
+          </div>
         </div>
+
+        <aside class="hero__panel" aria-label="خلاصهٔ مجموعه نمودارها">
+          <div class="panel__heading">
+            <span>نمای کلی آزمایش‌ها</span>
+            <strong>۹ شکل</strong>
+          </div>
+          <div class="panel__grid">
+            <div><strong>۲</strong><span>Equality &amp; Max</span></div>
+            <div><strong>۳</strong><span>Secure Median</span></div>
+            <div><strong>۲</strong><span>Extended SCG</span></div>
+            <div><strong>۲</strong><span>Federated MNIST</span></div>
+          </div>
+          <div class="panel__footer">
+            <span class="status-dot" aria-hidden="true"></span>
+            خروجی اجرای واقعی MP-SPDZ
+          </div>
+        </aside>
       </div>
     </header>
 
     <main>
-      <section class="intro" aria-labelledby="gallery-heading">
+      <nav class="quick-nav" aria-label="دسترسی سریع به گروه نمودارها">
+        <span>پرش سریع</span>
+        <a href="#equality-max">Equality &amp; Max</a>
+        <a href="#median">Secure Median</a>
+        <a href="#extended-scg">Extended SCG</a>
+        <a href="#federated-mnist">Federated MNIST</a>
+      </nav>
+
+      <section class="intro" id="figures" aria-labelledby="gallery-heading">
         <div>
-          <p class="section-label">PAPER FIGURES</p>
+          <p class="section-label">PAPER FIGURES · LINEAR AXES</p>
           <h2 id="gallery-heading">گالری نتایج</h2>
         </div>
         <p>
-          برای مشاهده‌ی تصویر در اندازه‌ی اصلی روی نمودار کلیک کنید. نسخه‌ی PDF
-          هر شکل نیز برای استفاده در گزارش و ارائه در دسترس است.
+          روی هر نمودار کلیک کنید تا تصویر اصلی باز شود. نسخهٔ PDF همهٔ شکل‌ها
+          نیز برای استفاده در گزارش، مقاله و اسلاید ارائه در دسترس است.
         </p>
       </section>
 
       <section class="gallery" aria-label="نمودارهای بنچمارک">
-        <article class="figure-card">
+        <article class="figure-card" id="equality-max">
           <a class="figure-card__image" href="figures/03-equality-max-runtime-vs-N-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/03-equality-max-runtime-vs-N-linear.png" alt="زمان اجرای Equality و Max نسبت به تعداد partyها" loading="eager" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۳</span>
-            <h3>زمان اجرای Equality و Max نسبت به N</h3>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۳</span>
+              <span class="category">Equality &amp; Max</span>
+            </div>
+            <h3>زمان اجرا نسبت به N</h3>
             <p>اثر افزایش هم‌زمان تعداد partyها و، در Max، تعداد ورودی‌ها بر زمان اجرای امن.</p>
-            <a class="download" href="figures/03-equality-max-runtime-vs-N-linear.pdf">دریافت PDF</a>
+            <a class="download" href="figures/03-equality-max-runtime-vs-N-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
         <article class="figure-card">
           <a class="figure-card__image" href="figures/04-equality-max-communication-vs-N-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/04-equality-max-communication-vs-N-linear.png" alt="ارتباط Equality و Max نسبت به تعداد partyها" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۴</span>
-            <h3>ارتباط Equality و Max نسبت به N</h3>
-            <p>رشد حجم کل داده‌ی مبادله‌شده با بزرگ‌ترشدن مقیاس مسئله.</p>
-            <a class="download" href="figures/04-equality-max-communication-vs-N-linear.pdf">دریافت PDF</a>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۴</span>
+              <span class="category">Equality &amp; Max</span>
+            </div>
+            <h3>حجم ارتباط نسبت به N</h3>
+            <p>رشد حجم کل دادهٔ مبادله‌شده با بزرگ‌ترشدن مقیاس مسئله.</p>
+            <a class="download" href="figures/04-equality-max-communication-vs-N-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
-        <article class="figure-card">
+        <article class="figure-card" id="median">
           <a class="figure-card__image" href="figures/05-median-runtime-vs-dimension-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/05-median-runtime-vs-dimension-linear.png" alt="زمان Secure Median نسبت به بُعد بردار" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۵</span>
-            <h3>زمان Secure Median نسبت به بُعد بردار</h3>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۵</span>
+              <span class="category">Secure Median</span>
+            </div>
+            <h3>زمان اجرا نسبت به بُعد بردار</h3>
             <p>زمان اجرای Median مختصات‌محور برای بردارهای ۱۰۰ تا ۱۰٬۰۰۰ بعدی.</p>
-            <a class="download" href="figures/05-median-runtime-vs-dimension-linear.pdf">دریافت PDF</a>
+            <a class="download" href="figures/05-median-runtime-vs-dimension-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
         <article class="figure-card">
           <a class="figure-card__image" href="figures/06-median-communication-vs-dimension-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/06-median-communication-vs-dimension-linear.png" alt="ارتباط Secure Median نسبت به بُعد بردار" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۶</span>
-            <h3>ارتباط Secure Median نسبت به بُعد بردار</h3>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۶</span>
+              <span class="category">Secure Median</span>
+            </div>
+            <h3>حجم ارتباط نسبت به بُعد بردار</h3>
             <p>رشد تقریباً خطی ارتباط با افزایش تعداد مختصات بردارهای خصوصی.</p>
-            <a class="download" href="figures/06-median-communication-vs-dimension-linear.pdf">دریافت PDF</a>
+            <a class="download" href="figures/06-median-communication-vs-dimension-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
-        <article class="figure-card">
+        <article class="figure-card" id="extended-scg">
           <a class="figure-card__image" href="figures/07-extended-scg-runtime-vs-N-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/07-extended-scg-runtime-vs-N-linear.png" alt="زمان Extended SCG نسبت به تعداد partyها" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۷</span>
-            <h3>زمان Extended SCG نسبت به N</h3>
-            <p>هزینه‌ی محاسبه‌ی امن مقدار بیشینه همراه با index منبع آن.</p>
-            <a class="download" href="figures/07-extended-scg-runtime-vs-N-linear.pdf">دریافت PDF</a>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۷</span>
+              <span class="category">Extended SCG</span>
+            </div>
+            <h3>زمان اجرا نسبت به N</h3>
+            <p>هزینهٔ محاسبهٔ امن مقدار بیشینه همراه با index منبع آن.</p>
+            <a class="download" href="figures/07-extended-scg-runtime-vs-N-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
         <article class="figure-card">
           <a class="figure-card__image" href="figures/08-extended-scg-communication-vs-N-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/08-extended-scg-communication-vs-N-linear.png" alt="ارتباط Extended SCG نسبت به تعداد partyها" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۸</span>
-            <h3>ارتباط Extended SCG نسبت به N</h3>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۸</span>
+              <span class="category">Extended SCG</span>
+            </div>
+            <h3>حجم ارتباط نسبت به N</h3>
             <p>حجم کل پیام‌های ردوبدل‌شده برای مقیاس‌های مختلف Extended SCG.</p>
-            <a class="download" href="figures/08-extended-scg-communication-vs-N-linear.pdf">دریافت PDF</a>
+            <a class="download" href="figures/08-extended-scg-communication-vs-N-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
-        <article class="figure-card figure-card--wide">
+        <article class="figure-card figure-card--feature">
           <a class="figure-card__image" href="figures/10-network-median-runtime-linear.png" target="_blank" rel="noreferrer">
-            <img src="figures/10-network-median-runtime-linear.png" alt="زمان Secure Median در شبکه‌های شبیه‌سازی‌شده‌ی LAN و WAN" loading="lazy" />
+            <img src="figures/10-network-median-runtime-linear.png" alt="زمان Secure Median در شبکه‌های شبیه‌سازی‌شدهٔ LAN و WAN" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۱۰</span>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۱۰</span>
+              <span class="category">Network Conditions</span>
+            </div>
             <h3>اثر LAN و WAN بر زمان Secure Median</h3>
-            <p>مقایسه‌ی اجرای مستقیم تحت پروفایل‌های واقعی tc netem برای LAN و WAN.</p>
-            <a class="download" href="figures/10-network-median-runtime-linear.pdf">دریافت PDF</a>
+            <p>مقایسهٔ اجرای مستقیم تحت پروفایل‌های واقعی tc netem برای LAN و WAN.</p>
+            <a class="download" href="figures/10-network-median-runtime-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
-        <article class="figure-card">
+        <article class="figure-card" id="federated-mnist">
           <a class="figure-card__image" href="figures/13-mnist-accuracy-by-round-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/13-mnist-accuracy-by-round-linear.png" alt="دقت MNIST در roundهای آموزش فدره" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۱۳</span>
-            <h3>دقت MNIST در هر round فدره</h3>
-            <p>مقایسه‌ی مسیر دقت plaintext و تجمیع امن در loopback، LAN و WAN.</p>
-            <a class="download" href="figures/13-mnist-accuracy-by-round-linear.pdf">دریافت PDF</a>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۱۳</span>
+              <span class="category">Federated MNIST</span>
+            </div>
+            <h3>دقت در هر round فدره</h3>
+            <p>مقایسهٔ مسیر دقت plaintext و تجمیع امن در loopback، LAN و WAN.</p>
+            <a class="download" href="figures/13-mnist-accuracy-by-round-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
 
         <article class="figure-card">
           <a class="figure-card__image" href="figures/16-mnist-end-to-end-training-time-linear.png" target="_blank" rel="noreferrer">
             <img src="figures/16-mnist-end-to-end-training-time-linear.png" alt="زمان کل آموزش MNIST در چهار حالت" loading="lazy" />
+            <span class="image-cta">نمایش تمام‌اندازه <b aria-hidden="true">↗</b></span>
           </a>
           <div class="figure-card__body">
-            <span class="figure-number">شکل ۱۶</span>
-            <h3>زمان کل آموزش MNIST</h3>
+            <div class="figure-card__meta">
+              <span class="figure-number">شکل ۱۶</span>
+              <span class="category">Federated MNIST</span>
+            </div>
+            <h3>زمان کل آموزش</h3>
             <p>مجموع زمان سه round برای plaintext و تجمیع امن در سه وضعیت شبکه.</p>
-            <a class="download" href="figures/16-mnist-end-to-end-training-time-linear.pdf">دریافت PDF</a>
+            <a class="download" href="figures/16-mnist-end-to-end-training-time-linear.pdf"><span aria-hidden="true">↓</span> دریافت PDF</a>
           </div>
         </article>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>MP-SPDZ Equality, Max, Median &amp; Extended SCG Benchmarks</p>
-      <a href="https://github.com/MohammadZare96/mp-spdz-equality-max-benchmarks">مشاهده‌ی مخزن در GitHub</a>
+      <div>
+        <strong>MP-SPDZ Benchmarks</strong>
+        <p>Equality · Max · Median · Extended SCG · Federated MNIST</p>
+      </div>
+      <a href="#top">بازگشت به بالا <span aria-hidden="true">↑</span></a>
     </footer>
   </body>
 </html>
